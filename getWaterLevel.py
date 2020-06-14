@@ -51,7 +51,7 @@ depth = np.asarray(depth)
 currentDepth = np.median(depth)
 
 # write data to file
-dFile = open("/home/pi/waterLevel/waterLevel.data","a")
+dFile = open("/home/pi/waterLevel/data/waterLevel_%s.data" % (now.strftime("%Y-%m"),"a")
 dFile.write("%s %s %s\n" % (now.strftime("%Y-%m-%d"),now.strftime("%H-%M-%S"),depth))
 dFile.close()
 
