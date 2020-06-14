@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 from datetime import datetime
+import numpy as np
 
 GPIO.setmode(GPIO.BOARD)
 
@@ -33,6 +34,7 @@ def measurement():
     dist = (stop-start)*17150
     if verbose:
         print('Distance is :',dist,' cm')
+    return dist
 
 ###############################################
 Nmeasurements = 50
@@ -52,7 +54,7 @@ currentDepth = np.median(depth)
 
 # write data to file
 dFile = open("/home/pi/waterLevel/waterLevel.data","a")
-dFile.write("%s %s %s\n" % (now.strftime("%Y-%m-%d"),now.strftime("%H-%M-%S"),depth))
+dFile.write("%s %s %s\n" % (now.strftime("%Y-%m-%d"),now.strftime("%H-%M-%S"),currentDepth))
 dFile.close()
 
 GPIO.cleanup()
