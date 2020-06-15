@@ -1,0 +1,7 @@
+#!/bin/bash
+now="$(date)"
+commitString="new data from $now"
+git add data/
+git commit -m "$commitString"
+git push
+
