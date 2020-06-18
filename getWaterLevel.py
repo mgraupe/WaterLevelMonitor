@@ -9,6 +9,8 @@ GPIO.setmode(GPIO.BOARD)
 
 TRIG = 11
 ECHO = 13
+MaximalHeight = 95 # depth cannot be larger than this value
+
 
 #################################################
 def measurement():
@@ -52,8 +54,9 @@ for i in range(Nmeasurements):
     time.sleep(0.5)
 
 depth = np.asarray(depth)
-currentDepth = np.median(depth)
-
+depthClean = depth[depth<MaximalHeight]
+currentDepth = np.median(depthClean)
+print('actual water level : ',currentDepth,' cm')
 # write data to file
 cwd = os.getcwd()
 
