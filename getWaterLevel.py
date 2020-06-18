@@ -3,13 +3,26 @@ import time
 from datetime import datetime
 import numpy as np
 import os
+import sys
 
+try:
+    sys.argv[1]
+except:
+    saveData = False
+else:
+    if sys.argv[1] == 'save':
+        saveData = True
+        print('Data will be saved.')
+        print(saveData)
 
 GPIO.setmode(GPIO.BOARD)
 
 TRIG = 11
 ECHO = 13
 MaximalHeight = 95 # depth cannot be larger than this value
+
+Nmeasurements = 50
+verbose = True
 
 
 #################################################
@@ -41,9 +54,6 @@ def measurement():
     return dist
 
 ###############################################
-Nmeasurements = 50
-verbose = True
-
 
 now = datetime.now()
 
@@ -53,16 +63,18 @@ for i in range(Nmeasurements):
     depth.append(d)
     time.sleep(0.5)
 
+GPIO.cleanup()
+
 depth = np.asarray(depth)
 depthClean = depth[depth<MaximalHeight]
 currentDepth = np.median(depthClean)
 print('actual water level : ',currentDepth,' cm')
 # write data to file
-cwd = os.getcwd()
+print(saveData)
+if saveData :
+    dFile = open("/home/pi/WaterLevelMonitor/data/waterLevel_%s.data" % now.strftime("%Y-%m"),"a")
+    dFile.write("%s %s %s\n" % (now.strftime("%Y-%m-%d"),now.strftime("%H-%M-%S"),currentDepth))
+    dFile.close()
+    print('data saved to file')
 
-dFile = open(cwd+"/data/waterLevel_%s.data" % now.strftime("%Y-%m"),"a")
-dFile.write("%s %s %s\n" % (now.strftime("%Y-%m-%d"),now.strftime("%H-%M-%S"),currentDepth))
-dFile.close()
-
-GPIO.cleanup()
 
