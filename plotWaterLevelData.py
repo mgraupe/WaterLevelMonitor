@@ -7,7 +7,7 @@ def plotWaterLevel():
     now = datetime.now()
     currentYearMonth = now.strftime("%Y-%m")
 
-    wLevel = pd.read_csv('data/waterLevel_%s.data' % currentYearMonth,sep='    ',header=None)
+    wLevel = pd.read_csv('/home/pi/WaterLevelMonitor/data/waterLevel_%s.data' % currentYearMonth,sep='\t',header=None)
     #print(wLevel.shape)
     #print(wLevel.head(3))
     #print(wLevel.tail(3))
@@ -19,5 +19,5 @@ def plotWaterLevel():
     #ts.plot()
     wLevel.plot(x='Time',y='WaterLevel',style='.') 
     #plt.show()
-    plt.savefig('figures/waterLevel_%s.png' % currentYearMonth)
-    os.system('cp figures/waterLevel_%s.png figures/waterLevel_current.png' % currentYearMonth)
+    plt.savefig('/home/pi/WaterLevelMonitor/figures/waterLevel_%s.png' % currentYearMonth)
+    os.system('cp /home/pi/WaterLevelMonitor/figures/waterLevel_%s.png /home/pi/WaterLevelMonitor/figures/waterLevel_current.png' % currentYearMonth)
