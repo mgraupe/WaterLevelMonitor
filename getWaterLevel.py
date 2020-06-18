@@ -5,6 +5,8 @@ import numpy as np
 import os
 import sys
 
+import plotWaterLevelData as pltWaterLevel
+
 try:
     sys.argv[1]
 except:
@@ -77,4 +79,6 @@ if saveData :
     dFile.close()
     print('data saved to file')
 
-
+###################################
+print('plotting data ...')
+pltWaterLevel.plotWaterLevel()
