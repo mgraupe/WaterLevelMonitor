@@ -6,4 +6,4 @@ The figure below shows the water level time course of the current month.
 
 ![Current WaterLevel](figures/waterLevel_current.png)
 
-Other months can be found in the `figures` folder. 
+Other months can be found in the [`figures`](figures/) folder. 
