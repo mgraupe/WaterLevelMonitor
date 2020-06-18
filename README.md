@@ -1,3 +1,3 @@
 # WaterLevelMonitor
 
-[Current WaterLevel](figures/waterLevel_current.png)
+![Current WaterLevel](figures/waterLevel_current.png)
