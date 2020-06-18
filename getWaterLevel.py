@@ -73,7 +73,7 @@ print('actual water level : ',currentDepth,' cm')
 print(saveData)
 if saveData :
     dFile = open("/home/pi/WaterLevelMonitor/data/waterLevel_%s.data" % now.strftime("%Y-%m"),"a")
-    dFile.write("%s %s %s\n" % (now.strftime("%Y-%m-%d"),now.strftime("%H-%M-%S"),currentDepth))
+    dFile.write("%s %s \t %s\n" % (now.strftime("%Y-%m-%d"),now.strftime("%H-%M-%S"),currentDepth))
     dFile.close()
     print('data saved to file')
 
