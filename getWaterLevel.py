@@ -4,6 +4,7 @@ from datetime import datetime
 import numpy as np
 import os
 import sys
+import pdb
 
 import plotWaterLevelData as pltWaterLevel
 
@@ -26,6 +27,10 @@ MaximalHeight = 95 # depth cannot be larger than this value
 Nmeasurements = 50
 verbose = True
 
+scriptWD = os.path.abspath(__file__)
+print(scriptWD)
+
+pdb.set_trace()
 
 #################################################
 def measurement():

@@ -7,7 +7,7 @@ def plotWaterLevel():
     now = datetime.now()
     currentYearMonth = now.strftime("%Y-%m")
 
-    wLevel = pd.read_csv('data/waterLevel_%s.data' % currentYearMonth,sep='    ',header=None)
+    wLevel = pd.read_csv('data/waterLevel_%s.data' % currentYearMonth,sep='\t',header=None)
     #print(wLevel.shape)
     #print(wLevel.head(3))
     #print(wLevel.tail(3))
