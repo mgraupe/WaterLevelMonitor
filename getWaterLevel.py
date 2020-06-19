@@ -77,7 +77,7 @@ depthClean = depth[depth<MaximalHeight]
 currentDepth = np.median(depthClean)
 print('actual water level : ',currentDepth,' cm')
 # write data to file
-print(saveData)
+
 if saveData :
     dFile = open("/home/pi/WaterLevelMonitor/data/waterLevel_%s.data" % now.strftime("%Y-%m"),"a")
     dFile.write("%s %s\t%s\n" % (now.strftime("%Y-%m-%d"),now.strftime("%H-%M-%S"),currentDepth))
