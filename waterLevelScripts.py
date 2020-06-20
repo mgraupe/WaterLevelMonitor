@@ -2,6 +2,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from datetime import datetime
 import os 
+import numpy as np
+from scipy.interpolate import interp1d
 
 def plotWaterLevel(wd=None):
     now = datetime.now()
@@ -24,3 +26,16 @@ def plotWaterLevel(wd=None):
     #plt.show()
     plt.savefig('%s/figures/waterLevel_%s.png' % (wd,currentYearMonth))
     os.system('cp %s/figures/waterLevel_%s.png %s/figures/waterLevel_current.png' % (wd,currentYearMonth,wd))
+
+
+def getWaterContentFromDistance(dist,wd=None):
+    calData = np.load(wd+'/data/calibrationData.npy')
+    H20interp = interp1d(calData[:,1], calData[:,0])
+    if dist > calData[0,1]:
+        H20 = 0.
+    elif dist < calData[-1,1]:
+        H20 = calData[-1,0]
+    else:
+        H20 = H20interp(dist)
+    return H20
+    

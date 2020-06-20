@@ -6,7 +6,7 @@ import os
 import sys
 import pdb
 
-import plotWaterLevelData as pltWaterLevel
+import waterLevelScripts as waterLevel
 
 try:
     sys.argv[1]
@@ -73,15 +73,19 @@ GPIO.cleanup()
 depth = np.asarray(depth)
 depthClean = depth[depth<MaximalHeight]
 currentDepth = np.median(depthClean)
-print('actual water level : ',currentDepth,' cm')
+currentH20Content = waterLevel.getWaterContentFromDistance(currentDepth,wd=scriptWD)
+print('current water level : ',currentDepth,' cm')
+print('current water content : ',currentH20Content,' l')
 # write data to file
 
 if saveData :
-    dFile = open("%s/data/waterLevel_%s.data" % (scriptWD,now.strftime("%Y-%m")),"a")
-    dFile.write("%s %s\t%s\n" % (now.strftime("%Y-%m-%d"),now.strftime("%H-%M-%S"),currentDepth))
+    dFile = open("%s/data/waterLevel2_%s.data" % (scriptWD,now.strftime("%Y-%m")),"a")
+    dFile.write("%s %s\t%s\t%s\n" % (now.strftime("%Y-%m-%d"),now.strftime("%H:%M:%S"),currentDepth,currentH20Content))
     dFile.close()
     print('data saved to file')
+    
+    print('plotting data ...')
+    waterLevel.plotWaterLevel(wd=scriptWD)
 
 ###################################
-print('plotting data ...')
-pltWaterLevel.plotWaterLevel(wd=scriptWD)
+
