@@ -4,6 +4,7 @@ from datetime import datetime
 import os 
 import numpy as np
 from scipy.interpolate import interp1d
+import pdb
 
 def plotWaterLevel(wd=None):
     now = datetime.now()
@@ -17,13 +18,21 @@ def plotWaterLevel(wd=None):
     #print(wLevel.head(3))
     #print(wLevel.tail(3))
     #wLevel.info()
-    wLevel = wLevel.rename(columns={1:'WaterLevel'})
+    wLevel = wLevel.rename(columns={1:'DistanceToWater'})
+    wLevel = wLevel.rename(columns={2:'WaterContent'})
     wLevel['Time'] = pd.to_datetime(wLevel[0], format='%Y-%m-%d %H-%M-%S') 
-
+    
+    pdb.set_trace()
     #ts = pd.Series(wLevel['Time'],wLevel[1])
     #ts.plot()
-    wLevel.plot(x='Time',y='WaterLevel',style='.') 
+    plt.figure()
+    plt.subplot(211)
+    #fig, axes = plt.subplots(nrows=2, ncols=1)
+    wLevel.plot(x='Time',y='DistanceToWater',style='.') 
     #plt.show()
+    plt.subplot(212)
+    wLevel.plot(x='Time',y='WaterContent',style='.',ax=plt.gca()) 
+    #
     plt.savefig('%s/figures/waterLevel_%s.png' % (wd,currentYearMonth))
     os.system('cp %s/figures/waterLevel_%s.png %s/figures/waterLevel_current.png' % (wd,currentYearMonth,wd))
 
