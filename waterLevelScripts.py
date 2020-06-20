@@ -10,7 +10,7 @@ def plotWaterLevel(wd=None):
     currentYearMonth = now.strftime("%Y-%m")
 
 
-    wLevel = pd.read_csv(wd+'/data/waterLevel_%s.data' % currentYearMonth,sep='\t',header=None)
+    wLevel = pd.read_csv(wd+'/data/waterLevel2_%s.data' % currentYearMonth,sep='\t',header=None)
 
     #wLevel = pd.read_csv('/home/pi/WaterLevelMonitor/data/waterLevel_%s.data' % currentYearMonth,sep='\t',header=None)
     #print(wLevel.shape)
@@ -18,7 +18,7 @@ def plotWaterLevel(wd=None):
     #print(wLevel.tail(3))
     #wLevel.info()
     wLevel = wLevel.rename(columns={1:'WaterLevel'})
-    wLevel['Time'] = pd.to_datetime(wLevel[0], format='%Y-%m-%d %H-%M-%S') 
+    wLevel['Time'] = pd.to_datetime(wLevel[0], format='%Y-%m-%d %H:%M:%S') 
 
     #ts = pd.Series(wLevel['Time'],wLevel[1])
     #ts.plot()
