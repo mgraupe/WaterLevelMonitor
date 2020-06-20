@@ -27,10 +27,8 @@ MaximalHeight = 95 # depth cannot be larger than this value
 Nmeasurements = 50
 verbose = True
 
-scriptWD = os.path.abspath(__file__)
-print(scriptWD)
+scriptWD = os.path.dirname(os.path.realpath(__file__))
 
-pdb.set_trace()
 
 #################################################
 def measurement():
@@ -79,11 +77,11 @@ print('actual water level : ',currentDepth,' cm')
 # write data to file
 
 if saveData :
-    dFile = open("/home/pi/WaterLevelMonitor/data/waterLevel_%s.data" % now.strftime("%Y-%m"),"a")
+    dFile = open("%s/data/waterLevel_%s.data" % (scriptWD,now.strftime("%Y-%m")),"a")
     dFile.write("%s %s\t%s\n" % (now.strftime("%Y-%m-%d"),now.strftime("%H-%M-%S"),currentDepth))
     dFile.close()
     print('data saved to file')
 
 ###################################
 print('plotting data ...')
-pltWaterLevel.plotWaterLevel()
+pltWaterLevel.plotWaterLevel(wd=scriptWD)
