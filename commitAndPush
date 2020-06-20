@@ -4,6 +4,6 @@ commitString="new data from $now"
 cd WaterLevelMonitor/
 git add data/
 git add figures/
-git commit -m "$commitString"
+git commit -a -m "$commitString"
 git push
 
