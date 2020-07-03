@@ -31,18 +31,21 @@ tables = pd.read_html(url) # Returns list of all tables on page
 weatherValues = tables[1] # Select table with weather data 
 
 n = 0
-while True:
+measurementExists = False
+while n<12:
     hour  = tables[1]['Heure locale'][n]
     #print(hour, fullHour)
     if hour == fullHour:
         pluie = float(weatherValues['Pluie'][n].split()[0])
+        measurementExists = True
         break
     n+=1
-    
-print('It rained %s mm in the last hour : %s' %(pluie,hour))
+
+if measurementExists:
+    print('It rained %s mm in the last hour : %s' %(pluie,hour))
     
 
-if saveData :
+if saveData and  measurementExists:
     dFile = open("%s/data/rainfall_%s.data" % (scriptWD,now.strftime("%Y-%m")),"a")
     dFile.write("%s %s\t%s\n" % (now.strftime("%Y-%m-%d"),now.strftime("%H:00"),pluie))
     dFile.close()
