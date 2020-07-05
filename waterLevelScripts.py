@@ -84,7 +84,7 @@ def plotRainFallData(wd=None):
     
     #ts = pd.Series(wLevel['Time'],wLevel[1])
     #ts.plot()
-    plt.figure(figsize=(6,10))
+    plt.figure(figsize=(8,10))
     plt.subplots_adjust(left=0.17, right=0.83, top=0.95, bottom=0.1,hspace=0.4)
     ax0 = plt.subplot(211)
     #fig, axes = plt.subplots(nrows=2, ncols=1)
