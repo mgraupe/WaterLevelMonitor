@@ -6,6 +6,8 @@ from datetime import datetime
 import os
 import sys
 
+import waterLevelScripts as waterLevel
+
 try:
     sys.argv[1]
 except:
