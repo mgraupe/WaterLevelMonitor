@@ -84,8 +84,8 @@ def plotRainFallData(wd=None):
     
     #ts = pd.Series(wLevel['Time'],wLevel[1])
     #ts.plot()
-    plt.figure(figsize=(8,10))
-    plt.subplots_adjust(left=0.17, right=0.83, top=0.95, bottom=0.1,hspace=0.4)
+    plt.figure(figsize=(7,10))
+    plt.subplots_adjust(left=0.15, right=0.88, top=0.95, bottom=0.1,hspace=0.4)
     ax0 = plt.subplot(211)
     #fig, axes = plt.subplots(nrows=2, ncols=1)
     joinedTS.plot(y='Rainfall',style='_',ms=5,ax=ax0)#,style='_',ms=2,ax=ax0) 
@@ -94,7 +94,7 @@ def plotRainFallData(wd=None):
     #wLevelSummary.plot(y='Change',secondary_y=True,style='_',ms=2,ax=ax0) 
     
     ax0.set_ylabel('Rainfall (mm/1h)',fontsize=14)
-    ax0.right_ax.set_ylabel('Water change (l)',fontsize=14)
+    ax0.right_ax.set_ylabel('Positive water change (l)',fontsize=14)
     ax0.right_ax.set_ylim(-1,)
     ax0.set_xlabel('date and time',fontsize=14)
     #ax0.set_xlim(pd.Timestamp('2020-07-01'), pd.Timestamp('2020-07-10'))
