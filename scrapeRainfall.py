@@ -50,6 +50,9 @@ if saveData and  measurementExists:
     dFile.write("%s %s\t%s\n" % (now.strftime("%Y-%m-%d"),now.strftime("%H:00"),pluie))
     dFile.close()
     print('rainfall data saved to file')
+    
+    print('plotting rainfall data ...')
+    waterLevel.plotRainFallData(wd=scriptWD)
 
 
 
