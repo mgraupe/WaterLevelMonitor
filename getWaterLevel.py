@@ -80,7 +80,7 @@ print('current water content : ',currentH20Content,' l')
 
 if saveData :
     dFile = open("%s/data/waterLevel2_%s.data" % (scriptWD,now.strftime("%Y-%m")),"a")
-    dFile.write("%s %s\t%s\t%s\n" % (now.strftime("%Y-%m-%d"),now.strftime("%H:%M:%S"),currentDepth,currentH20Content))
+    dFile.write("%s %s\t%s\t%s\n" % (now.strftime("%Y-%m-%d"),now.strftime("%H:%M:%S"),np.round(currentDepth,3),np.round(currentH20Content,3)))
     dFile.close()
     print('data saved to file')
     
