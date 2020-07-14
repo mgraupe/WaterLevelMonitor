@@ -33,10 +33,11 @@ def main(saveData,now,scriptWD):
         print("Temperature : ", temp_c[n][3], "C")
     del ds
 
-    jsn = jsn_sr0t4_2.jsn_sr0t4_2()
+    jsn = jsn_sr0t4_2.jsnsr0t4()
     (currentDepth, currentH20Content) = jsn.readJSNSR0T4()
     print('current water level : ', currentDepth, ' cm')
     print('current water content : ', currentH20Content, ' l')
+    del jsn
 
     if saveData:
         dFile = open("%s/data/terraceWeather_%s.data" % (scriptWD, now.strftime("%Y-%m")), "a")
