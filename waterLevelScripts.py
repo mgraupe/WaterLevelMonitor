@@ -59,8 +59,8 @@ def plotRainFallData(wd=None):
     #print(wLevel.tail(3))
     #wLevel.info()
 
-    wLevel = wLevel.rename(columns={1:'DistanceToWater'})
-    wLevel = wLevel.rename(columns={2:'WaterContent'})
+    wLevel = wLevel.rename(columns={6:'DistanceToWater'})
+    wLevel = wLevel.rename(columns={7:'WaterContent'})
     wLevel['Time'] = pd.to_datetime(wLevel[0], format='%Y-%m-%d %H:%M:%S') 
     wLevel = wLevel.set_index('Time')
     wLevel.drop([0], axis=1, inplace=True)

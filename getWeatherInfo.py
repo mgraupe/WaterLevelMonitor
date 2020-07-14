@@ -2,6 +2,7 @@ import sys
 import os
 from datetime import datetime
 import numpy as np
+import time
 
 import bme280
 import ds18b20
@@ -34,6 +35,7 @@ def main(saveData,now,scriptWD):
     print('current water content : ', currentH20Content, ' l')
     del jsn
 
+    time.sleep(1.) # wait a second for the read LED to switch off
     import tsl2591 # has to be imported here, otherwise jsn_sr0t4 script gives error
     tsl = tsl2591.tsl2591()
     (lux,infrared,visible,full_spectrum) = tsl.readTSL2591All()
