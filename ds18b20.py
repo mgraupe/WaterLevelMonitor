@@ -1,3 +1,7 @@
+###########################################
+# DS18B20 temperature sensor
+# will print temperature of all connected probes
+###########################################
 import os
 import glob
 import time

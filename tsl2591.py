@@ -1,5 +1,7 @@
-# Simple demo of the TSL2591 sensor.  Will print the detected light value
-# every second.
+###########################################
+# TSL2591 sensor
+# will print the detected light value
+###########################################
 import time
 
 import board
