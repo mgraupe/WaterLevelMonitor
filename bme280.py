@@ -52,13 +52,14 @@ class bme280:
         result =  data[index] & 0xFF
         return result
 
-    def readBME280ID(self,addr=self.DEVICE):
+    def readBME280ID(self):
         # Chip ID Register Address
         REG_ID     = 0xD0
-        (chip_id, chip_version) = self.bus.read_i2c_block_data(addr, REG_ID, 2)
+        (chip_id, chip_version) = self.bus.read_i2c_block_data(self.DEVICE, REG_ID, 2)
         return (chip_id, chip_version)
 
-    def readBME280All(self,addr=self.DEVICE):
+    def readBME280All(self):
+        addr = self.DEVICE
         # Register Addresses
         REG_DATA = 0xF7
         REG_CONTROL = 0xF4
