@@ -13,10 +13,10 @@ import adafruit_tsl2591
 class tsl2591:
     def __init__(self):
         # Initialize the I2C bus.
-        i2c = busio.I2C(board.SCL, board.SDA)
+        self.i2c = busio.I2C(board.SCL, board.SDA)
 
         # Initialize the sensor.
-        self.sensor = adafruit_tsl2591.TSL2591(i2c)
+        self.sensor = adafruit_tsl2591.TSL2591(self.i2c)
 
     def readTSL2591All(self):
 
@@ -49,7 +49,7 @@ class tsl2591:
         # Full spectrum (visible + IR) also range from 0-2147483647 (32-bit)
         full_spectrum = self.sensor.full_spectrum
         #print("Full spectrum (IR + visible) light: {0}".format(full_spectrum))
-
+        self.i2c.deinit()
         return (lux,infrared,visible,full_spectrum)
         #time.sleep(1.0)
 
