@@ -3,11 +3,16 @@ import os
 from datetime import datetime
 import numpy as np
 import time
+from ISStreamer.Streamer import Streamer
 
 import bme280
 import ds18b20
 import jsn_sr0t4_2
 
+BUCKET_NAME = "TerrasseWeather"
+BUCKET_KEY = 'QJPQAL7P89J3' # Replace XXXX with your bucket key
+ACCESS_KEY = 'ist_Q3XcvFz_kKO7mVrjFKzbrCdn2joWqT1J' # Replace YYYY with your access key
+SENSOR_LOCATION_NAME = "My Terrace"
 
 def main(saveData,now,scriptWD):
 
@@ -52,8 +57,21 @@ def main(saveData,now,scriptWD):
         dFile.close()
         print('data saved to file')
 
+        # send data to initial state
+        streamer = Streamer(bucket_name=BUCKET_NAME, bucket_key=BUCKET_KEY, access_key=ACCESS_KEY)
+        streamer.log(SENSOR_LOCATION_NAME + " Humidity (%)", np.round(humidity, 2))
+        streamer.log(SENSOR_LOCATION_NAME + " Pressure (hPa)", np.round(pressure, 2))
+        streamer.log(SENSOR_LOCATION_NAME + " Chip Temperature (C)", temperature)
+        streamer.log(SENSOR_LOCATION_NAME + " Water Bucket Temperature (C)", temp_c[0][3])
+        streamer.log(SENSOR_LOCATION_NAME + " Outside Temperature (C)", temp_c[1][3])
+        streamer.log(SENSOR_LOCATION_NAME + " Water Content (l)", np.round(currentH20Content, 3))
+        streamer.log(SENSOR_LOCATION_NAME + " Luminosity (lux)", lux)
+        streamer.flush()
+        print('Upload code finished')
+
         #print('plotting data ...')
         #waterLevel.plotWaterLevel(wd=scriptWD)
+
 
 if __name__=="__main__":
     try:
