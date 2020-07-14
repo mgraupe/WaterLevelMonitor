@@ -50,7 +50,7 @@ def plotRainFallData(wd=None):
     currentYearMonth = now.strftime("%Y-%m")
 
 
-    wLevel = pd.read_csv(wd+'/data/waterLevel2_%s.data' % currentYearMonth,sep='\t',header=None)
+    wLevel = pd.read_csv(wd+'/data/terraceWeather_%s.data' % currentYearMonth,sep='\t',header=None)
     rainfall = pd.read_csv(wd+'/data/rainfall_%s.data' % currentYearMonth,sep='\t',header=None)
 
     #wLevel = pd.read_csv('/home/pi/WaterLevelMonitor/data/waterLevel_%s.data' % currentYearMonth,sep='\t',header=None)
