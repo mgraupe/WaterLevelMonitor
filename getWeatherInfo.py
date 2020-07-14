@@ -16,14 +16,6 @@ def main(saveData,now,scriptWD):
     print("Humidity : ", humidity, "%")
     del bme
 
-    tsl = tsl2591.tsl2591()
-    (lux,infrared,visible,full_spectrum) = tsl.readTSL2591All()
-    print("Total light : ", lux, "lux")
-    print("Infrared light : ", infrared)
-    print("Visible light : ", visible)
-    print("Full spectrum (IR + visible) light : ", full_spectrum)
-    del tsl
-
     ds = ds18b20.ds18b20()
     temp_c = ds.readDS18b20All()
     for n in range(len(temp_c)):
@@ -38,6 +30,18 @@ def main(saveData,now,scriptWD):
     print('current water level : ', currentDepth, ' cm')
     print('current water content : ', currentH20Content, ' l')
     del jsn
+
+    tsl = tsl2591.tsl2591()
+    (lux,infrared,visible,full_spectrum) = tsl.readTSL2591All()
+    print("Total light : ", lux, "lux")
+    print("Infrared light : ", infrared)
+    print("Visible light : ", visible)
+    print("Full spectrum (IR + visible) light : ", full_spectrum)
+    del tsl
+
+
+
+
 
     if saveData:
         dFile = open("%s/data/terraceWeather_%s.data" % (scriptWD, now.strftime("%Y-%m")), "a")
