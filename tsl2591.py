@@ -58,6 +58,7 @@ def main():
     tsl = tsl2591()
 
     (lux,infrared,visible,full_spectrum) = tsl.readTSL2591All()
+    del tsl
 
     print("Total light : ", lux, "lux")
     print("Infrared light : ", infrared)
