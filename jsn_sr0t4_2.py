@@ -14,11 +14,14 @@ import waterLevelScripts as waterLevel
 
 class jsnsr0t4:
     def __init__(self):
+        
         self.TRIG = 11
         self.ECHO = 13
         self.MaximalHeight = 95 # depth cannot be larger than this value
         self.Nmeasurements = 50 # number of measurements, final value is median, measurements are noisy
         self.verbose = True
+        #GPIO.cleanup()
+        GPIO.setmode(GPIO.BOARD)
 
     def measurement(self):
 
@@ -49,7 +52,8 @@ class jsnsr0t4:
         return dist
 
     def readJSNSR0T4(self):
-        GPIO.setmode(GPIO.BOARD)
+        #GPIO.cleanup()
+        #GPIO.setmode(GPIO.BOARD)
 
         depth = []
         for i in range(self.Nmeasurements):
