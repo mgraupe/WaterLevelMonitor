@@ -68,7 +68,7 @@ def plotRainFallData(wd=None):
     #increases = np.diff(wLevelFullHour['WaterContent'])
     
     #wLevelSummary = pd.DataFrame()
-    wLevelSummary = wLevel.resample('H').first()
+    wLevelSummary = wLevel.resample('H').first() # resample weather-data to 1 hour interval, use the first value of each hour after resampling
     wLevelSummary['Change'] = np.hstack((0,np.diff(wLevelSummary['WaterContent'])))
     #wLevelSummary = wLevelSummary.drop(['DistanceToWater','WaterContent'],axis=1)
     
