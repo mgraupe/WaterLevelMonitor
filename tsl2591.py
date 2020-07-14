@@ -49,6 +49,7 @@ class tsl2591:
         # Full spectrum (visible + IR) also range from 0-2147483647 (32-bit)
         full_spectrum = self.sensor.full_spectrum
         #print("Full spectrum (IR + visible) light: {0}".format(full_spectrum))
+        self.sensor.disable()
         self.i2c.deinit()
         return (lux,infrared,visible,full_spectrum)
         #time.sleep(1.0)
