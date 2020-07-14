@@ -11,9 +11,6 @@ import pdb
 
 import waterLevelScripts as waterLevel
 
-
-GPIO.setmode(GPIO.BOARD)
-
 TRIG = 11
 ECHO = 13
 MaximalHeight = 95 # depth cannot be larger than this value
@@ -22,6 +19,7 @@ verbose = True
 
 #################################################
 def measurement():
+
     GPIO.setup(TRIG,GPIO.OUT)
     GPIO.setup(TRIG,0)
 
@@ -49,6 +47,7 @@ def measurement():
     return dist
 
 def readJSNSR0T4():
+    GPIO.setmode(GPIO.BOARD)
 
     depth = []
     for i in range(Nmeasurements):
