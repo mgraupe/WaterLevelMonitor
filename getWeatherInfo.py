@@ -9,25 +9,32 @@ import jsn_sr0t4_2
 
 def main(saveData,now,scriptWD):
 
-    (temperature,pressure,humidity) = bme280.readBME280All()
+    bme = bme280()
+    (temperature,pressure,humidity) = bme.readBME280All()
     print("Temperature : ", temperature, "C")
     print("Pressure : ", pressure, "hPa")
     print("Humidity : ", humidity, "%")
+    del bme
 
-    (lux,infrared,visible,full_spectrum) = tsl2591.readTSL2591All()
+    tsl = tsl2591()
+    (lux,infrared,visible,full_spectrum) = tsl.readTSL2591All()
     print("Total light : ", lux, "lux")
     print("Infrared light : ", infrared)
     print("Visible light : ", visible)
     print("Full spectrum (IR + visible) light : ", full_spectrum)
+    del tsl
 
-    temp_c = ds18b20.readDS18b20All()
+    ds = ds18b20()
+    temp_c = ds.readDS18b20All()
     for n in range(len(temp_c)):
         print("Senor # : ", n)
         print("Sensor ID : ", temp_c[n][1])
         print("Sensor name :", temp_c[n][2])
         print("Temperature : ", temp_c[n][3], "C")
+    del ds
 
-    (currentDepth, currentH20Content) = jsn_sr0t4_2.readJSNSR0T4()
+    jsn = jsn_sr0t4_2()
+    (currentDepth, currentH20Content) = jsn.readJSNSR0T4()
     print('current water level : ', currentDepth, ' cm')
     print('current water content : ', currentH20Content, ' l')
 
