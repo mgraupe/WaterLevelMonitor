@@ -22,15 +22,17 @@ def main(saveData,now,scriptWD):
         print("Sensor ID : ", temp_c[n][1])
         print("Sensor name :", temp_c[n][2])
         print("Temperature : ", temp_c[n][3], "C")
+        if temp_c[n][2] == 'Water bucket':
+            tempInBucket = temp_c[n][3]
     del ds
 
-    jsn = jsn_sr0t4_2.jsnsr0t4()
+    jsn = jsn_sr0t4_2.jsnsr0t4(tempInBucket)
     (currentDepth, currentH20Content) = jsn.readJSNSR0T4()
     print('current water level : ', currentDepth, ' cm')
     print('current water content : ', currentH20Content, ' l')
     del jsn
 
-    import tsl2591
+    import tsl2591 # has to be imported here, otherwise jsn_sr0t4 script gives error
     tsl = tsl2591.tsl2591()
     (lux,infrared,visible,full_spectrum) = tsl.readTSL2591All()
     print("Total light : ", lux, "lux")

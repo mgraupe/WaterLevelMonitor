@@ -13,15 +13,18 @@ import waterLevelScripts as waterLevel
 
 
 class jsnsr0t4:
-    def __init__(self):
-        
+    def __init__(self,tempInBucket):
+
         self.TRIG = 11
         self.ECHO = 13
         self.MaximalHeight = 95 # depth cannot be larger than this value
         self.Nmeasurements = 50 # number of measurements, final value is median, measurements are noisy
         self.verbose = True
+
         #GPIO.cleanup()
         GPIO.setmode(GPIO.BOARD)
+        self.tempInWaterBucket = tempInBucket
+
 
     def measurement(self):
 
@@ -45,8 +48,8 @@ class jsnsr0t4:
         while GPIO.input(self.ECHO) == 1:
             pass
         stop = time.time()
-
-        dist = (stop-start)*17150
+        speedOfSound = 331.4 + 0.6*self.tempInWaterBucket
+        dist = (stop-start)*speedOfSound*100/2. #(stop-start)*17150 #duration*0.034/2;
         if self.verbose:
             print('Distance is :',dist,' cm')
         return dist
