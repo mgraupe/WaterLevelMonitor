@@ -1,10 +1,12 @@
 import sys
 import os
 from datetime import datetime
+import numpy as np
 
 import bme280
 import ds18b20
 import jsn_sr0t4_2
+
 
 def main(saveData,now,scriptWD):
 
@@ -42,12 +44,9 @@ def main(saveData,now,scriptWD):
     del tsl
 
 
-
-
-
     if saveData:
         dFile = open("%s/data/terraceWeather_%s.data" % (scriptWD, now.strftime("%Y-%m")), "a")
-        dFile.write("%s %s\t%s\t%s\n" % (now.strftime("%Y-%m-%d"), now.strftime("%H:%M:%S"), np.round(currentDepth, 3), np.round(currentH20Content, 3)))
+        dFile.write("%s %s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" % (now.strftime("%Y-%m-%d"), now.strftime("%H:%M:%S"), temperature,np.round(pressure, 2),np.round(humidity, 2),temp_c[0][3],temp_c[1][3],np.round(currentDepth, 3), np.round(currentH20Content, 3),lux,infrared,visible,full_spectrum))
         dFile.close()
         print('data saved to file')
 
