@@ -21,12 +21,12 @@ class tsl2591:
     def readTSL2591All(self):
 
         # You can optionally change the gain and integration time:
-        self.sensor.gain = adafruit_tsl2591.GAIN_LOW #(1x gain)
-        # sensor.gain = adafruit_tsl2591.GAIN_MED (25x gain, the default)
+        #self.sensor.gain = adafruit_tsl2591.GAIN_LOW #(1x gain)
+        self.sensor.gain = adafruit_tsl2591.GAIN_MED #(25x gain, the default)
         # sensor.gain = adafruit_tsl2591.GAIN_HIGH (428x gain)
         # sensor.gain = adafruit_tsl2591.GAIN_MAX (9876x gain)
-        self.sensor.integration_time = adafruit_tsl2591.INTEGRATIONTIME_100MS #(100ms, default)
-        # sensor.integration_time = adafruit_tsl2591.INTEGRATIONTIME_200MS (200ms)
+        #self.sensor.integration_time = adafruit_tsl2591.INTEGRATIONTIME_100MS #(100ms, default)
+        self.sensor.integration_time = adafruit_tsl2591.INTEGRATIONTIME_200MS #(200ms)
         # sensor.integration_time = adafruit_tsl2591.INTEGRATIONTIME_300MS (300ms)
         # sensor.integration_time = adafruit_tsl2591.INTEGRATIONTIME_400MS (400ms)
         # sensor.integration_time = adafruit_tsl2591.INTEGRATIONTIME_500MS (500ms)
