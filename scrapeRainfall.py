@@ -63,7 +63,11 @@ class scrapeRainfall:
         wLevelSummary = wLevel.resample('H').first() # resample weather-data to 1 hour interval, use the first value of each hour after resampling
         wLevelSummary['Change'] = np.hstack((0,np.diff(wLevelSummary['WaterContent'])))
 
-        currentH = wLevelSummary[date].between_time(start_time='%02d:50' % (fullHourInt-1),end_time='%02d:10' % fullHourInt)['Change']
+        if fullHourInt == 0:
+            hourBefore = 23
+        else:
+            hourBefore = (fullHourInt-1)
+        currentH = wLevelSummary[date].between_time(start_time='%02d:50' % hourBefore,end_time='%02d:10' % fullHourInt)['Change']
         #pdb.set_trace()
         if len(currentH)==0:
             print('None')
