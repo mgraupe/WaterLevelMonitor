@@ -70,9 +70,9 @@ class scrapeRainfall:
         currentH = wLevelSummary[date].between_time(start_time='%02d:50' % hourBefore,end_time='%02d:10' % fullHourInt)['Change']
         #pdb.set_trace()
         if len(currentH)==0:
-            print('None')
+            return('None',hourBefore,fullHourInt)
         else:
-            return (currentH[0])
+            return (currentH[0],hourBefore,fullHourInt)
         #pdb.set_trace()
 
 def main():
@@ -85,8 +85,8 @@ def main():
     print("Measurement hour :", hour)
     print("Rainfall in mm   :", pluie)
 
-    (waterChange) = rf.getDifferenceInWaterButtContent(now)
-    print("Water in butt changed by : %s l between %02dh and %02dh" % (waterChange,int(now.strftime("%H"))-1,int(now.strftime("%H"))))
+    (waterChange,hourBefore,currentHour) = rf.getDifferenceInWaterButtContent(now)
+    print("Water in butt changed by : %s l between %02dh and %02dh" % (waterChange,hourBefore,currentHour))
 
 
 if __name__=="__main__":
