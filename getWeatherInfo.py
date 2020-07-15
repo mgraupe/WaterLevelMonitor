@@ -52,8 +52,8 @@ def main(saveData,now,scriptWD):
     del tsl
 
     minutes = int(now.strftime("%M"))
-    scrapeRainfall = False
-    if (minutes > 19) and (minutes < 39): # scrape rainfall only once per hour at 20 min
+    rainfallScraped = False
+    if (minutes > 19) and (minutes < 29): # scrape rainfall only once per hour at 20 min
         fullHour = now.strftime("%Hh00")
         rf = scrapeRainfall.scrapeRainfall(fullHour)
         (pluie, hour) = rf.getRainfallData()
@@ -62,7 +62,7 @@ def main(saveData,now,scriptWD):
 
         waterChange = rf.getDifferenceInWaterButtContent(now)
         print("Water in butt changed by : %s l between %02dh and %02dh" % (waterChange,int(now.strftime("%H"))-1,int(now.strftime("%H"))))
-        scrapeRainfall = True
+        rainfallScraped = True
 
 
     if saveData:
@@ -80,7 +80,7 @@ def main(saveData,now,scriptWD):
         streamer.log(SENSOR_LOCATION_NAME + " Outside Temperature (C)", temp_c[1][3])
         streamer.log(SENSOR_LOCATION_NAME + " Water Content (l)", np.round(currentH20Content, 3))
         streamer.log(SENSOR_LOCATION_NAME + " Luminosity (lux)", np.round(lux,4))
-        if scrapeRainfall:
+        if rainfallScraped:
             if pluie is not None:
                 streamer.log(SENSOR_LOCATION_NAME + " Rainfall (mm)", pluie)
             streamer.log(SENSOR_LOCATION_NAME + " Water Change (l)", np.round(waterChange,4))
