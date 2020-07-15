@@ -84,5 +84,6 @@ def main():
     (waterChange) = rf.getDifferenceInWaterButtContent(now)
     print("Water in butt changed by : %s l between %02dh and %02dh" % (waterChange,int(now.strftime("%H"))-1,int(now.strftime("%H"))))
 
+
 if __name__=="__main__":
     main()
