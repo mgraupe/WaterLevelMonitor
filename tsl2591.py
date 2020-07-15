@@ -17,8 +17,9 @@ class tsl2591:
 
         # Initialize the sensor.
         self.sensor = adafruit_tsl2591.TSL2591(self.i2c)
-
+        self.sensor.enable()
     def readTSL2591All(self):
+
 
         # You can optionally change the gain and integration time:
         self.sensor.gain = adafruit_tsl2591.GAIN_LOW #(1x gain)
@@ -34,6 +35,7 @@ class tsl2591:
 
         # Read the total lux, IR, and visible light levels and print it every second.
         #while True:
+        #for n in range(Nmeasurements):
         # Read and calculate the light level in lux.
         lux = self.sensor.lux
         #print("Total light: {0}lux".format(lux))
@@ -49,8 +51,8 @@ class tsl2591:
         # Full spectrum (visible + IR) also range from 0-2147483647 (32-bit)
         full_spectrum = self.sensor.full_spectrum
         #print("Full spectrum (IR + visible) light: {0}".format(full_spectrum))
-        self.sensor.disable()
-        self.i2c.deinit()
+        #self.sensor.disable()
+        #self.i2c.deinit()
         return (lux,infrared,visible,full_spectrum)
         #time.sleep(1.0)
 
