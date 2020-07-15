@@ -84,17 +84,16 @@ def main(saveData,now,scriptWD):
                 streamer.log(SENSOR_LOCATION_NAME + " Rainfall (mm)", pluie)
             streamer.log(SENSOR_LOCATION_NAME + " Water Change (l)", np.round(waterChange,4))
 
+            dFile = open("%s/data/rainfallWaterChange_%s.data" % (scriptWD,now.strftime("%Y-%m")),"a")
+            dFile.write("%s %s\t%s\t%s\n" % (now.strftime("%Y-%m-%d"),now.strftime("%H:00"),pluie,np.round(waterChange,4)))
+            dFile.close()
+            print('rainfall and water change data saved to file')
+
         streamer.flush()
         print('Upload code finished')
 
         #print('plotting data ...')
         #waterLevel.plotWaterLevel(wd=scriptWD)
-
-        #if saveData and  measurementExists:
-        #dFile = open("%s/data/rainfall_%s.data" % (scriptWD,now.strftime("%Y-%m")),"a")
-        #dFile.write("%s %s\t%s\n" % (now.strftime("%Y-%m-%d"),now.strftime("%H:00"),pluie))
-        #dFile.close()
-        #print('rainfall data saved to file')
 
         #print('plotting rainfall data ...')
         #waterLevel.plotRainFallData(wd=scriptWD)
