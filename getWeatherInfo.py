@@ -52,7 +52,7 @@ def main(saveData,now,scriptWD):
 
     minutes = int(now.strftime("%M"))
     scrapeRainfall = False
-    if (minutes > 19) and (minutes < 29): # scrape rainfall only once per hour at 20 min
+    if (minutes > 19) and (minutes < 39): # scrape rainfall only once per hour at 20 min
         fullHour = now.strftime("%Hh00")
         rf = scrapeRainfall(fullHour)
         (pluie, hour) = rf.getRainfallData()
