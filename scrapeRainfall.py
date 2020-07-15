@@ -64,7 +64,7 @@ class scrapeRainfall:
         wLevelSummary['Change'] = np.hstack((0,np.diff(wLevelSummary['WaterContent'])))
 
         currentH = wLevelSummary[date].between_time(start_time='%02d:50' % (fullHourInt-1),end_time='%02d:10' % fullHourInt)['Change']
-        pdb.set_trace()
+        #pdb.set_trace()
         if len(currentH)==0:
             print('None')
         else:
