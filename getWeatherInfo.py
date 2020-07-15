@@ -53,7 +53,7 @@ def main(saveData,now,scriptWD):
 
     if saveData:
         dFile = open("%s/data/terraceWeather_%s.data" % (scriptWD, now.strftime("%Y-%m")), "a")
-        dFile.write("%s %s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" % (now.strftime("%Y-%m-%d"), now.strftime("%H:%M:%S"), temperature,np.round(pressure, 2),np.round(humidity, 2),temp_c[0][3],temp_c[1][3],np.round(currentDepth, 3), np.round(currentH20Content, 3),lux,infrared,visible,full_spectrum))
+        dFile.write("%s %s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" % (now.strftime("%Y-%m-%d"), now.strftime("%H:%M:%S"), temperature,np.round(pressure, 2),np.round(humidity, 2),temp_c[0][3],temp_c[1][3],np.round(currentDepth, 3), np.round(currentH20Content, 3),np.round(lux,4),infrared,visible,full_spectrum))
         dFile.close()
         print('data saved to file')
 
@@ -65,7 +65,7 @@ def main(saveData,now,scriptWD):
         streamer.log(SENSOR_LOCATION_NAME + " Water Bucket Temperature (C)", temp_c[0][3])
         streamer.log(SENSOR_LOCATION_NAME + " Outside Temperature (C)", temp_c[1][3])
         streamer.log(SENSOR_LOCATION_NAME + " Water Content (l)", np.round(currentH20Content, 3))
-        streamer.log(SENSOR_LOCATION_NAME + " Luminosity (lux)", lux)
+        streamer.log(SENSOR_LOCATION_NAME + " Luminosity (lux)", np.round(lux,4))
         streamer.flush()
         print('Upload code finished')
 
