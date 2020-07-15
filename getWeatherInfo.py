@@ -53,7 +53,7 @@ def main(saveData,now,scriptWD):
 
     minutes = int(now.strftime("%M"))
     rainfallScraped = False
-    if (minutes > 19) and (minutes < 29): # scrape rainfall only once per hour at 20 min
+    if (minutes > 49) and (minutes < 59): # scrape rainfall only once per hour at 20 min
         fullHour = now.strftime("%Hh00")
         rf = scrapeRainfall.scrapeRainfall(fullHour)
         (pluie, hour) = rf.getRainfallData()
@@ -61,7 +61,7 @@ def main(saveData,now,scriptWD):
         print("Rainfall in mm   :", pluie)
 
         waterChange = rf.getDifferenceInWaterButtContent(now)
-        print("Water in butt changed by : %s l between %02dh and %02dh" % (waterChange,int(now.strftime("%H"))-1,int(now.strftime("%H"))))
+        print("Water in butt changed by : %s l between %02dh and %02dh" % (waterChange[0],waterChange[1],waterChange[2]))
         rainfallScraped = True
 
 
@@ -83,10 +83,10 @@ def main(saveData,now,scriptWD):
         if rainfallScraped:
             if pluie is not None:
                 streamer.log(SENSOR_LOCATION_NAME + " Rainfall (mm)", pluie)
-            streamer.log(SENSOR_LOCATION_NAME + " Water Change (l)", np.round(waterChange,4))
+            streamer.log(SENSOR_LOCATION_NAME + " Water Change (l)", np.round(waterChange[0],4))
 
             dFile = open("%s/data/rainfallWaterChange_%s.data" % (scriptWD,now.strftime("%Y-%m")),"a")
-            dFile.write("%s %s\t%s\t%s\n" % (now.strftime("%Y-%m-%d"),now.strftime("%H:00"),pluie,np.round(waterChange,4)))
+            dFile.write("%s %s\t%s\t%s\n" % (now.strftime("%Y-%m-%d"),now.strftime("%H:00"),pluie,np.round(waterChange[0],4)))
             dFile.close()
             print('rainfall and water change data saved to file')
 
