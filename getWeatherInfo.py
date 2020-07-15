@@ -51,6 +51,7 @@ def main(saveData,now,scriptWD):
     del tsl
 
 
+
     if saveData:
         dFile = open("%s/data/terraceWeather_%s.data" % (scriptWD, now.strftime("%Y-%m")), "a")
         dFile.write("%s %s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" % (now.strftime("%Y-%m-%d"), now.strftime("%H:%M:%S"), temperature,np.round(pressure, 2),np.round(humidity, 2),temp_c[0][3],temp_c[1][3],np.round(currentDepth, 3), np.round(currentH20Content, 3),lux,infrared,visible,full_spectrum))
@@ -72,6 +73,14 @@ def main(saveData,now,scriptWD):
         #print('plotting data ...')
         #waterLevel.plotWaterLevel(wd=scriptWD)
 
+        #if saveData and  measurementExists:
+        #dFile = open("%s/data/rainfall_%s.data" % (scriptWD,now.strftime("%Y-%m")),"a")
+        #dFile.write("%s %s\t%s\n" % (now.strftime("%Y-%m-%d"),now.strftime("%H:00"),pluie))
+        #dFile.close()
+        #print('rainfall data saved to file')
+
+        #print('plotting rainfall data ...')
+        #waterLevel.plotRainFallData(wd=scriptWD)
 
 if __name__=="__main__":
     try:
