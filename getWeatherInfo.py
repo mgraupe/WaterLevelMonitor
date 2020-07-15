@@ -50,6 +50,18 @@ def main(saveData,now,scriptWD):
     print("Full spectrum (IR + visible) light : ", full_spectrum)
     del tsl
 
+    minutes = int(now.strftime("%M"))
+    scrapeRainfall = False
+    if (minutes > 19) and (minutes < 29): # scrape rainfall only once per hour at 20 min
+        fullHour = now.strftime("%Hh00")
+        rf = scrapeRainfall(fullHour)
+        (pluie, hour) = rf.getRainfallData()
+        print("Measurement hour :", hour)
+        print("Rainfall in mm   :", pluie)
+
+        waterChange = rf.getDifferenceInWaterButtContent(now)
+        print("Water in butt changed by : %s l between %02dh and %02dh" % (waterChange,int(now.strftime("%H"))-1,int(now.strftime("%H"))))
+        scrapeRainfall = True
 
 
     if saveData:
@@ -67,17 +79,21 @@ def main(saveData,now,scriptWD):
         streamer.log(SENSOR_LOCATION_NAME + " Outside Temperature (C)", temp_c[1][3])
         streamer.log(SENSOR_LOCATION_NAME + " Water Content (l)", np.round(currentH20Content, 3))
         streamer.log(SENSOR_LOCATION_NAME + " Luminosity (lux)", np.round(lux,4))
+        if scrapeRainfall:
+            if pluie is not None:
+                streamer.log(SENSOR_LOCATION_NAME + " Rainfall (mm)", pluie)
+            streamer.log(SENSOR_LOCATION_NAME + " Water Change (l)", np.round(waterChange,4))
+
+            dFile = open("%s/data/rainfallWaterChange_%s.data" % (scriptWD,now.strftime("%Y-%m")),"a")
+            dFile.write("%s %s\t%s\t%s\n" % (now.strftime("%Y-%m-%d"),now.strftime("%H:00"),pluie,np.round(waterChange,4)))
+            dFile.close()
+            print('rainfall and water change data saved to file')
+
         streamer.flush()
         print('Upload code finished')
 
         #print('plotting data ...')
         #waterLevel.plotWaterLevel(wd=scriptWD)
-
-        #if saveData and  measurementExists:
-        #dFile = open("%s/data/rainfall_%s.data" % (scriptWD,now.strftime("%Y-%m")),"a")
-        #dFile.write("%s %s\t%s\n" % (now.strftime("%Y-%m-%d"),now.strftime("%H:00"),pluie))
-        #dFile.close()
-        #print('rainfall data saved to file')
 
         #print('plotting rainfall data ...')
         #waterLevel.plotRainFallData(wd=scriptWD)
