@@ -8,6 +8,7 @@ from ISStreamer.Streamer import Streamer
 import bme280
 import ds18b20
 import jsn_sr0t4_2
+import scrapeRainfall
 
 BUCKET_NAME = "TerrasseWeather"
 BUCKET_KEY = 'QJPQAL7P89J3' # Replace XXXX with your bucket key
@@ -54,7 +55,7 @@ def main(saveData,now,scriptWD):
     scrapeRainfall = False
     if (minutes > 19) and (minutes < 39): # scrape rainfall only once per hour at 20 min
         fullHour = now.strftime("%Hh00")
-        rf = scrapeRainfall(fullHour)
+        rf = scrapeRainfall.scrapeRainfall(fullHour)
         (pluie, hour) = rf.getRainfallData()
         print("Measurement hour :", hour)
         print("Rainfall in mm   :", pluie)
