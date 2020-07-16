@@ -53,7 +53,7 @@ def main(saveData,now,scriptWD):
 
     minutes = int(now.strftime("%M"))
     rainfallScraped = False
-    if (minutes > 49) and (minutes < 59): # scrape rainfall only once per hour at 20 min
+    if (minutes > 19) and (minutes < 29): # scrape rainfall only once per hour at 20 min
         fullHour = now.strftime("%Hh00")
         rf = scrapeRainfall.scrapeRainfall(fullHour)
         (pluie, hour) = rf.getRainfallData()
@@ -110,5 +110,6 @@ if __name__=="__main__":
             print('Data will be saved.')
             print(saveData)
     now = datetime.now()
+    print('run at %s' % now.strftime("%Y-%m-%d %H:%M:%S"))
     scriptWD = os.path.dirname(os.path.realpath(__file__))
     main(saveData,now,scriptWD)

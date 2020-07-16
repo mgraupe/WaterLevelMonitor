@@ -27,7 +27,6 @@ class tsl2591:
         
     def readTSL2591All(self):
 
-
         for n in np.repeat(range(6),2): # repeat each intergration time twice, sensor exhibited delayed setting responses
             print(n, ' integration time ', self.integrationTimes[n][0])
             # You can optionally change the gain and integration time:
