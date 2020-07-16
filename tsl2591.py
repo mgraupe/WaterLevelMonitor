@@ -6,6 +6,7 @@ import time
 
 import board
 import busio
+import numpy as np
 
 import adafruit_tsl2591
 
