@@ -10,9 +10,8 @@ import ds18b20
 import jsn_sr0t4_2
 import scrapeRainfall
 
-BUCKET_NAME = "TerrasseWeather"
-BUCKET_KEY = 'QJPQAL7P89J3' # Replace XXXX with your bucket key
-ACCESS_KEY = 'ist_Q3XcvFz_kKO7mVrjFKzbrCdn2joWqT1J' # Replace YYYY with your access key
+import ITaccess as ITA
+
 SENSOR_LOCATION_NAME = "My Terrace"
 
 def main(saveData,now,scriptWD):
@@ -72,7 +71,7 @@ def main(saveData,now,scriptWD):
         print('data saved to file')
 
         # send data to initial state
-        streamer = Streamer(bucket_name=BUCKET_NAME, bucket_key=BUCKET_KEY, access_key=ACCESS_KEY)
+        streamer = Streamer(bucket_name=.BUCKET_NAME, bucket_key=ITA.BUCKET_KEY, access_key=ITA.ACCESS_KEY)
         streamer.log(SENSOR_LOCATION_NAME + " Humidity (%)", np.round(humidity, 2))
         streamer.log(SENSOR_LOCATION_NAME + " Pressure (hPa)", np.round(pressure, 2))
         streamer.log(SENSOR_LOCATION_NAME + " Chip Temperature (C)", temperature)
