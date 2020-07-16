@@ -27,12 +27,12 @@ class tsl2591:
         #self.sensor.gain = adafruit_tsl2591.GAIN_MED #(25x gain, the default)
         # sensor.gain = adafruit_tsl2591.GAIN_HIGH (428x gain)
         #self.sensor.gain = adafruit_tsl2591.GAIN_MAX# (9876x gain)
-        #self.sensor.integration_time = adafruit_tsl2591.INTEGRATIONTIME_100MS #(100ms, default)
+        self.sensor.integration_time = adafruit_tsl2591.INTEGRATIONTIME_100MS #(100ms, default)
         #self.sensor.integration_time = adafruit_tsl2591.INTEGRATIONTIME_200MS #(200ms)
         # sensor.integration_time = adafruit_tsl2591.INTEGRATIONTIME_300MS (300ms)
         #self.sensor.integration_time = adafruit_tsl2591.INTEGRATIONTIME_400MS #(400ms)
         # sensor.integration_time = adafruit_tsl2591.INTEGRATIONTIME_500MS (500ms)
-        self.sensor.integration_time = adafruit_tsl2591.INTEGRATIONTIME_600MS #(600ms)
+        #self.sensor.integration_time = adafruit_tsl2591.INTEGRATIONTIME_600MS #(600ms)
 
         # Read the total lux, IR, and visible light levels and print it every second.
         #while True:
