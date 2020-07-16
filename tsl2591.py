@@ -25,11 +25,11 @@ class tsl2591:
                                  [300,adafruit_tsl2591.INTEGRATIONTIME_300MS],
                                  [200,adafruit_tsl2591.INTEGRATIONTIME_200MS],
                                  [100,adafruit_tsl2591.INTEGRATIONTIME_100MS]]
-        
+        self.reps = [[0,0],[0,1],[1,0],[1,1],[2,0],[2,1],[3,0],[3,1],[4,0],[4,1],[5,0],[5,1]]
     def readTSL2591All(self):
 
-        for n in np.repeat(range(6),2): # repeat each intergration time twice, sensor exhibited delayed setting responses
-            print(n, ' integration time ', self.integrationTimes[n][0])
+        for n in range(len(self.reps)): # repeat each intergration time twice, sensor exhibited delayed setting responses
+            print(n, ' integration time ', self.integrationTimes[self.reps[n][0]][0])
             # You can optionally change the gain and integration time:
             #self.sensor.gain = adafruit_tsl2591.GAIN_LOW #(1x gain)
             #self.sensor.gain = adafruit_tsl2591.GAIN_MED #(25x gain, the default)
@@ -40,7 +40,7 @@ class tsl2591:
             # sensor.integration_time = adafruit_tsl2591.INTEGRATIONTIME_300MS (300ms)
             #self.sensor.integration_time = adafruit_tsl2591.INTEGRATIONTIME_400MS #(400ms)
             # sensor.integration_time = adafruit_tsl2591.INTEGRATIONTIME_500MS (500ms)
-            self.sensor.integration_time = self.integrationTimes[n][1] #adafruit_tsl2591.INTEGRATIONTIME_600MS #(600ms)
+            self.sensor.integration_time = self.integrationTimes[self.reps[n][0]][1] #adafruit_tsl2591.INTEGRATIONTIME_600MS #(600ms)
 
             try:
                 # Read the total lux, IR, and visible light levels and print it every second.
@@ -61,9 +61,14 @@ class tsl2591:
                 # Full spectrum (visible + IR) also range from 0-2147483647 (32-bit)
                 full_spectrum = self.sensor.full_spectrum
             except:
-                pass # run another try, or integration time in case of error
+                time.sleep(0.5)
+                #pass # run another try, or integration time in case of error
             else:
-                break # abort loop in case reading was successful
+                if self.reps[n][1]==0:
+                    time.sleep(0.5)
+                    #pass
+                else:
+                    break # abort loop in case reading was successful
             #print("Full spectrum (IR + visible) light: {0}".format(full_spectrum))
         #self.sensor.disable()
         #self.i2c.deinit()
