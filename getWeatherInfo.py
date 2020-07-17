@@ -71,7 +71,7 @@ def main(saveData,now,scriptWD):
         print('data saved to file')
 
         # send data to initial state
-        streamer = Streamer(bucket_name=.BUCKET_NAME, bucket_key=ITA.BUCKET_KEY, access_key=ITA.ACCESS_KEY)
+        streamer = Streamer(bucket_name=ITA.BUCKET_NAME, bucket_key=ITA.BUCKET_KEY, access_key=ITA.ACCESS_KEY)
         streamer.log(SENSOR_LOCATION_NAME + " Humidity (%)", np.round(humidity, 2))
         streamer.log(SENSOR_LOCATION_NAME + " Pressure (hPa)", np.round(pressure, 2))
         streamer.log(SENSOR_LOCATION_NAME + " Chip Temperature (C)", temperature)
