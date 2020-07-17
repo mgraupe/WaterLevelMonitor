@@ -31,7 +31,7 @@ class tsl2591:
         for n in range(len(self.reps)): # repeat each intergration time twice, sensor exhibited delayed setting responses
             print(n, ' integration time ', self.integrationTimes[self.reps[n][0]][0])
             # You can optionally change the gain and integration time:
-            #self.sensor.gain = adafruit_tsl2591.GAIN_LOW #(1x gain)
+            self.sensor.gain = adafruit_tsl2591.GAIN_LOW #(1x gain)
             #self.sensor.gain = adafruit_tsl2591.GAIN_MED #(25x gain, the default)
             #self.sensor.gain = adafruit_tsl2591.GAIN_HIGH (428x gain)
             #self.sensor.gain = adafruit_tsl2591.GAIN_MAX# (9876x gain)
@@ -41,7 +41,7 @@ class tsl2591:
             #self.sensor.integration_time = adafruit_tsl2591.INTEGRATIONTIME_400MS #(400ms)
             # sensor.integration_time = adafruit_tsl2591.INTEGRATIONTIME_500MS (500ms)
             self.sensor.integration_time = self.integrationTimes[self.reps[n][0]][1] #adafruit_tsl2591.INTEGRATIONTIME_600MS #(600ms)
-
+            #time.sleep(1.)
             try:
                 # Read the total lux, IR, and visible light levels and print it every second.
                 #while True:
@@ -61,7 +61,7 @@ class tsl2591:
                 # Full spectrum (visible + IR) also range from 0-2147483647 (32-bit)
                 full_spectrum = self.sensor.full_spectrum
             except:
-                time.sleep(0.5)
+                time.sleep(1.)
                 #pass # run another try, or integration time in case of error
             else:
                 if self.reps[n][1]==0:
