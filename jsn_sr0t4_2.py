@@ -13,7 +13,7 @@ import waterLevelScripts as waterLevel
 
 
 class jsnsr0t4:
-    def __init__(self,tempInBucket):
+    def __init__(self,tempInBucket=20.):
 
         self.TRIG = 11
         self.ECHO = 13
