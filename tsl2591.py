@@ -27,9 +27,9 @@ class tsl2591:
                                  [100,adafruit_tsl2591.INTEGRATIONTIME_100MS]]
         self.gains = [[1,adafruit_tsl2591.GAIN_LOW],
                       [25,adafruit_tsl2591.GAIN_MED],
-                      [428,adafruit_tsl2591.GAIN_MED],
+                      [428,adafruit_tsl2591.GAIN_HIGH],
                       [9876,adafruit_tsl2591.GAIN_MAX]]
-        self.reps = [[0,0],[0,1],[1,0],[1,1],[2,0],[2,1],[3,0],[3,1],[4,0],[4,1],[5,0],[5,1]]
+        self.reps = [[0,0],[0,1],[0,2],[1,0],[1,1],[1,2],[2,0],[2,1],[2,2],[3,0],[3,1],[3,2],[4,0],[4,1],[4,2],[5,0],[5,1],[5,2]]
     def readTSL2591All(self):
         for m in range(len(self.gains)):
             self.sensor.gain = self.gains[m][1]
@@ -72,7 +72,7 @@ class tsl2591:
                     time.sleep(1.)
                     #pass # run another try, or integration time in case of error
                 else:
-                    if self.reps[n][1]==0:
+                    if self.reps[n][1]<2:
                         time.sleep(0.7)
                         #pass
                     else:
