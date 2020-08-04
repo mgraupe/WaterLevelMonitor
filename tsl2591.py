@@ -26,7 +26,7 @@ class tsl2591:
                                  [200,adafruit_tsl2591.INTEGRATIONTIME_200MS],
                                  [100,adafruit_tsl2591.INTEGRATIONTIME_100MS]]
         self.gains = [[1,adafruit_tsl2591.GAIN_LOW],
-                      [25,adafruit_tsl2591.GAIN_MED],
+                      [16,adafruit_tsl2591.GAIN_MED],
                       [428,adafruit_tsl2591.GAIN_HIGH],
                       [9876,adafruit_tsl2591.GAIN_MAX]]
         self.reps = [[0,0],[0,1],[0,2],[1,0],[1,1],[1,2],[2,0],[2,1],[2,2],[3,0],[3,1],[3,2],[4,0],[4,1],[4,2],[5,0],[5,1],[5,2]]

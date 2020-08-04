@@ -26,11 +26,11 @@ class scrapeRainfall:
         url = r'https://www.infoclimat.fr/observations-meteo/temps-reel/paris-6eme-saint-germain-des-pres/000CT.html'
         tables = pd.read_html(url) # Returns list of all tables on page
         weatherValues = tables[1] # Select table with weather data
-
+        pdb.set_tracce()
         n = 0
         measurementExists = False
         while n<self.nMaxRows:
-            hour  = tables[1]['Heure locale'][n]
+            hour  = weatherValues['\n                Heure locale\n                            '][n]
             #print(hour, fullHour)
             if hour == self.fullHour:
                 pluie = float(weatherValues['Pluie'][n].split()[0])
