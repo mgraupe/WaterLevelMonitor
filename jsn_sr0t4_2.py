@@ -70,7 +70,7 @@ class jsnsr0t4:
         depthClean = depth[depth<self.MaximalHeight]
         #currentDepth = np.median(depthClean)
         # use max of the histogram as true water level
-        (hist, bin_edges) = np.histogram(depthClean, 50)  # histogram of depth measurments
+        (hist, bin_edges) = np.histogram(depthClean, 80)  # histogram of depth measurments
         binCenter = (bin_edges[1:] + bin_edges[:-1]) / 2  # convert bin-edges to centers
         idxBinMax = np.argmax(hist)  # find maximum of histogram
         currentDepth = binCenter[idxBinMax]  # use maximum of histogram as depth
