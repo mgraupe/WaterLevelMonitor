@@ -74,6 +74,8 @@ class jsnsr0t4:
         binCenter = (bin_edges[1:] + bin_edges[:-1]) / 2  # convert bin-edges to centers
         idxBinMax = np.argmax(hist)  # find maximum of histogram
         currentDepth = binCenter[idxBinMax]  # use maximum of histogram as depth
+        
+        pdb.set_trace()
         scriptWD = os.path.dirname(os.path.realpath(__file__))
         currentH20Content = waterLevel.getWaterContentFromDistance(currentDepth,wd=scriptWD)
 
