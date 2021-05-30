@@ -51,12 +51,17 @@ class scrapeRainfall:
 def main():
 
     now = datetime.now()
-    #fullHour = now.strftime("%Hh00")
-
+    currentTime = now.strftime("%Hh%M")
+    currentTimeDTO = datetime.strptime(currentTime,'%Hh%M')
+    
     rf = scrapeRainfall()
     (temp, hour) = rf.getRainfallData()
+    hourDTO = datetime.strptime(hour,'%Hh%M')
+    print("current time :", currentTime)
     print("Measurement time  :", hour)
     print("Temperature in °C :", temp)
+    diffTime = (currentTimeDTO-hourDTO).total_seconds() /60
+    print(diffTime)
 
     #(waterChange,hourBefore,currentHour) = rf.getDifferenceInWaterButtContent(now)
     #print("Water in butt changed by : %s l between %02dh and %02dh" % (waterChange,hourBefore,currentHour))

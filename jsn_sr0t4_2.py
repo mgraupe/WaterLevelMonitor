@@ -18,7 +18,7 @@ class jsnsr0t4:
         self.TRIG = 11
         self.ECHO = 13
         self.MaximalHeight = 95 # depth cannot be larger than this value
-        self.Nmeasurements = 50 # number of measurements, final value is median, measurements are noisy
+        self.Nmeasurements = 100 # number of measurements, final value is median, measurements are noisy
         self.verbose = True
 
         #GPIO.cleanup()
@@ -68,7 +68,12 @@ class jsnsr0t4:
 
         depth = np.asarray(depth)
         depthClean = depth[depth<self.MaximalHeight]
-        currentDepth = np.median(depthClean)
+        #currentDepth = np.median(depthClean)
+        # use max of the histogram as true water level
+        (hist, bin_edges) = np.histogram(depthClean, 20)  # histogram of fluorescence trace
+        binCenter = (bin_edges[1:] + bin_edges[:-1]) / 2  # convert bin-edges to centers
+        idxBinMax = np.argmax(hist)  # find maximum of histogram
+        currentDepth = binCenter[idxBinMax]  # use maximum of histogram as baseline fluorescence F0
         scriptWD = os.path.dirname(os.path.realpath(__file__))
         currentH20Content = waterLevel.getWaterContentFromDistance(currentDepth,wd=scriptWD)
 
