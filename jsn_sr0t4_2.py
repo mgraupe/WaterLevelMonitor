@@ -70,12 +70,12 @@ class jsnsr0t4:
         depthClean = depth[depth<self.MaximalHeight]
         #currentDepth = np.median(depthClean)
         # use max of the histogram as true water level
-        (hist, bin_edges) = np.histogram(depthClean, 20,range=(np.percentile(depthClean,33),np.percentile(depthClean,66)))  # histogram of depth measurments
+        (hist, bin_edges) = np.histogram(depthClean,20,range=(np.percentile(depthClean,10),np.percentile(depthClean,90)))  # histogram of depth measurments
         binCenter = (bin_edges[1:] + bin_edges[:-1]) / 2  # convert bin-edges to centers
         idxBinMax = np.argmax(hist)  # find maximum of histogram
         currentDepth = binCenter[idxBinMax]  # use maximum of histogram as depth
         
-        pdb.set_trace()
+        #pdb.set_trace()
         scriptWD = os.path.dirname(os.path.realpath(__file__))
         currentH20Content = waterLevel.getWaterContentFromDistance(currentDepth,wd=scriptWD)
 
